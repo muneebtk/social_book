@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/core.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/style.css' %}">
+</head>
+<body>
+    <h2 style="margin:10px">Authors and Sellers</h2>
+    <table class="table" border="2px">
+        <thead>
+            <tr>
+                <th scope="col">S No.</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users%}
+            <tr>
+                <td scope="row">{{forloop.counter}}</td>
+                <td scope="row">{{user.username}}</td>
+                <td scope="row">{{user.email}}</td>
+                <td scope="row">{{user.age}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

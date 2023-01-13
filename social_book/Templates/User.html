@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/core.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/style.css' %}">
+    </head>
+
+    <body>
+        <h2 style="margin:5px">Hi {{user.username}} Welcome to social book</h2>
+        <div style="display: flex;justify-content:space-between">
+            <button style="margin:5px" class="btn btn-outline-primary"
+                onclick="location.href='{% url 'user_books' %}'">Show
+                Books</button>
+
+            <button onclick="location.href='{% url 'logout' %}'" class="btn btn-outline-danger">Logout</button>
+        </div>
+        <div style="margin:30px">
+
+
+            <h2>Upload Books</h2>
+
+            <form method="POST" enctype="multipart/form-data" action="{% url 'user_page' %}">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Title</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input required class="form-control" type="text" placeholder="Enter Title" name="title">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Author</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input required class="form-control" placeholder="Enter Author Name" type="text" name="author">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Description</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input required class="form-control" value="" type="textarea" placeholder="Enter description"
+                            name="description">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Price</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input required class="form-control" type="number" placeholder="Enter price" name="price">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Select a book</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input accept=".pdf, .png" required class="form-control" type="file" placeholder="" name="book">
+                    </div>
+                </div>
+                <div class=" form-group row">
+                    <label for="visibility" class="col-sm-12 col-md-2 col-form-label">Visibility</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input type="checkbox" value=True name="visibility">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-outline-primary">Submit</button>
+                <!-- <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Telephone</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control" value="1-(111)-111-1111" type="tel">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Password</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control" value="password" type="password">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Number</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control" value="100" type="number">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="example-datetime-local-input" class="col-sm-12 col-md-2 col-form-label">Date and time</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control datetimepicker" placeholder="Choose Date anf time" type="text">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Date</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control date-picker" placeholder="Select Date" type="text">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Month</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control month-picker" placeholder="Select Month" type="text">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Time</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control time-picker td-input" placeholder="Select time" type="text" readonly="">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Select</label>
+            <div class="col-sm-12 col-md-10">
+                <select class="custom-select col-12">
+                    <option selected="">Choose...</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Color</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control" value="#563d7c" type="color">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-12 col-md-2 col-form-label">Input Range</label>
+            <div class="col-sm-12 col-md-10">
+                <input class="form-control" value="50" type="range">
+            </div>
+        </div> -->
+            </form>
+        </div>
+    </body>
+
+</html>

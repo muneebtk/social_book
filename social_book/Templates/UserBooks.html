@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/core.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/style.css' %}">
+</head>
+<body>
+    <div style="margin: 10px;">
+    <h2>User books</h2>
+    <table class="table" border="2px">
+        <thead>
+            <tr>
+                <th scope="col">S No.</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Price</th>
+                <th scope="col">Publish Year</th>
+                <th scope="col">Visibility</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td scope="row">{{forloop.counter}}</td>
+                <td scope="row">{{book.title}}</td>
+                <td scope="row">{{book.author}}</td>
+                <td scope="row">{{book.price}}</td>
+                <td scope="row">{{book.publish_date.date}}</td>
+                <td scope="row">{{book.visibility}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</body>
+</html>
