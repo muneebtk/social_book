@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/core.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/style.css' %}">
+    </head>
+
+    <body>
+        <div class="login-header box-shadow">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <div class="brand-logo">
+                    <a href="#">
+                        <img src="{% static 'vendors/images/deskapp-logo.svg' %}" alt="">
+                    </a>
+                </div>
+
+                <a href="{% url 'user_books' %}"><button class="btn btn-outline-primary btn-sm">Books</button></a>
+                <a href="{% url 'user_page' %}"><button class="btn btn-outline-primary btn-sm">Add Book</button></a>
+                <a href="{% url 'authors_and_sellers' %}"><button class="btn btn-outline-primary btn-sm">Authors and
+                        sellers</button></a>
+                <a href="{% url 'logout_page' %}"><button class="btn btn-outline-danger btn-sm">Logout</button></a>
+
+            </div>
+        </div>
+    </body>
+
+</html>

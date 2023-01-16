@@ -11,6 +11,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from . decorator import book_exist, authentication_not_required
 
 # Create your views here.
 
@@ -21,6 +22,7 @@ def home(request):
 # login a user
 
 
+@authentication_not_required
 def Login(request):
     if request.method == "POST":
         email = request.POST.get('email')
@@ -30,13 +32,14 @@ def Login(request):
             login(request, user)
             return redirect('user_page')
         else:
-            return redirect('login')
+            return redirect('login_page')
     else:
         return render(request, 'login.html')
 
 # signup a user
 
 
+@authentication_not_required
 def signup(request):
     pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
     if request.method == 'POST':
@@ -50,7 +53,6 @@ def signup(request):
             public_visibility = False
         date_of_birth = datetime.strptime(x, '%Y-%m-%d')
         today = date.today()
-        print(type(today), type(date_of_birth), 'todayyyyyy')
         age = today.year - date_of_birth.year - \
             ((today.month, today.day) < (date_of_birth. month, date_of_birth.day))
         if Account.objects.filter(email=email).exists():
@@ -109,13 +111,16 @@ def user_page(request):
 # authors and sellers who is visible to public
 
 
+@login_required(login_url='/login/')
 def authors_and_sellers(request):
     users = Account.objects.filter(public_visibility=True)
     return render(request, 'AuthorsAndSellers.html', {'users': users})
 
+
 # showing books of a user who is uploaded
 
 
+@book_exist
 @login_required(login_url='/login/')
 def user_books(request):
     user = request.user
@@ -128,4 +133,4 @@ def user_books(request):
 @login_required(login_url='/login/')
 def Logout(request):
     logout(request)
-    return redirect('login')
+    return redirect('login_page')

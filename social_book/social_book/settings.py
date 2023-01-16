@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
+    'home',
 ]
 
 AUTH_USER_MODEL = 'user_authentication.Account'
@@ -55,6 +59,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'social_book.urls'
+
+# SIMPLE_JWT = {
+#     'AUTH_HEADER_TYPES': ('JWT',),
+# }
 
 TEMPLATES = [
     {
@@ -74,6 +82,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'social_book.wsgi.application'
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
+DJOSER = {
+    "USER_ID_FIELD": "username",
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
